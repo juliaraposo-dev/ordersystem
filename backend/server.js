@@ -5,13 +5,9 @@ const PORT = process.env.PORT || 3001;
 
 async function startServer() {
   try {
-    await ItemModel.createTableItems();
-    console.log("Item table ready");
-
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
-
   } catch (error) {
     console.error("Failed to start server:", error);
     process.exit(1);
