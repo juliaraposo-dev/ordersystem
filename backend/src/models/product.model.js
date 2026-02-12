@@ -1,10 +1,10 @@
 import { openDB } from "../configDB.js";
 
-class ItemModel {
+class ProductModel {
 
-  static async createTableItems() {
+  static async createTableProducts() {
     const db = await openDB();
-      await db.exec(`   CREATE TABLE IF NOT EXISTS items (
+      await db.exec(`   CREATE TABLE IF NOT EXISTS products (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         description TEXT NOT NULL,
@@ -13,15 +13,15 @@ class ItemModel {
       )`);
   }
 
-    static async getAllItems() {
+    static async getAllProducts() {
         const db = await openDB();
-        const items = await db.all("SELECT * FROM items");
-        return items;
+        const products = await db.all("SELECT * FROM products");
+        return products;
     }
 
-    static async getItemById(id) {
+    static async getProductById(id) {
         const db = await openDB();
-        const item = await db.get("SELECT * FROM items WHERE id = ?", id);
+        const item = await db.get("SELECT * FROM products WHERE id = ?", id);
         return item;
     }
 }
