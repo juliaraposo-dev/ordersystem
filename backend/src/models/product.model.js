@@ -13,15 +13,17 @@ class ProductModel {
       )`);
   }
 
-    static async getAllProducts() {
-        const db = await openDB();
-        const products = await db.all("SELECT * FROM products");
-        return products;
-    }
+  static async getAllProducts() {
+      const db = await openDB();
+      const products = await db.all("SELECT * FROM products");
+      return products;
+  }
 
-    static async getProductById(id) {
-        const db = await openDB();
-        const item = await db.get("SELECT * FROM products WHERE id = ?", id);
-        return item;
-    }
+  static async getProductById(id) {
+      const db = await openDB();
+      const item = await db.get("SELECT * FROM products WHERE id = ?", id);
+      return item;
+  }
 }
+
+export default ProductModel;

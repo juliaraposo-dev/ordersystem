@@ -1,10 +1,11 @@
 import app from './src/app.js';
-import ItemModel from './src/models/item.model.js';
+import ProductModel from './src/models/product.model.js';
 
 const PORT = process.env.PORT || 3001;
 
 async function startServer() {
   try {
+    await ProductModel.createTableProducts();
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
