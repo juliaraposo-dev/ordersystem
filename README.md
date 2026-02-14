@@ -6,29 +6,36 @@ For evaluation purposes, the person responsible for the testing will have to ins
 
 <img width="980" height="391" alt="image" src="https://github.com/user-attachments/assets/053cf4ca-0852-4b55-b209-15a67630170b" />
 
+
 ⚡ Quick Start
 
 1. Backend (API)
+
 cd backend
 npm install
 npm start
 Runs on http://localhost:3001
 
-2. Frontend (UI)
+
+3. Frontend (UI)
+
 cd frontend
 npm install
 npm run dev
 Runs on http://localhost:5173
 
 🛠️ Tech Stack
-Frontend
+Frontend:
+
 Vite: Front-end tool.
 React 18: Component-based UI library.
 Tailwind CSS: Utility-first styling.
 Axios: Promise-based HTTP client for API communication.
 React Router: Declarative routing for navigation.
 
-Backend
+
+Backend:
+
 Node.js & Express: Web framework.
 SQLite3: Serverless, zero-configuration SQL database engine.
 CORS: Middleware to enable cross-origin resource sharing.
