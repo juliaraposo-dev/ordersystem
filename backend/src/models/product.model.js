@@ -8,7 +8,7 @@ class ProductModel {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         description TEXT NOT NULL,
-        price NUMERIC NOT NULL,
+        price REAL NOT NULL,
         image_url TEXT
       )`);
   }

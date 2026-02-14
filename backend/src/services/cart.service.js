@@ -49,10 +49,6 @@ class CartService {
         await CartModel.removeFromCart(productId);
     }
 
-    static async clearCart() {
-        await CartModel.clearCart();
-    }
-
     static async checkout() {
         if((await CartModel.getCartItems()).length === 0) {
             throw new Error("Cart is empty");

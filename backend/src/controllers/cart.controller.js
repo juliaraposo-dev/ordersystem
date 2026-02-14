@@ -33,20 +33,16 @@ class CartController {
 
     static async removeFromCart(req, res) {
         try {
-            const { product_id } = req.body;
-            await CartService.removeFromCart(product_id);
-            res.status(200).json({ message: "Product removed from cart" });
-        } catch (error) {
-            res.status(400).json({ error: error.message });
-        }
-    }
+            const { productId } = req.params;
 
-    static async clearCart(req, res) {
-        try {
-            await CartService.clearCart();
-            res.status(200).json({ message: "Cart cleared" });
+            if (!productId || productId === 'undefined') {
+                return res.status(400).json({ error: "Product ID is missing" });
+            }
+
+            await CartService.removeFromCart(productId);
+            res.status(200).json({ message: "Item removed" });
         } catch (error) {
-            res.status(400).json({ error: error.message });
+            res.status(500).json({ error: error.message });
         }
     }
 

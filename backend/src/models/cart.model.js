@@ -10,7 +10,6 @@ class CartModel {
             quantity INTEGER NOT NULL,
             status TEXT NOT NULL DEFAULT 'open',
             FOREIGN KEY (product_id) REFERENCES products(id)
-
             CHECK (quantity > 0 AND quantity <= 100)
         )`);
     }
@@ -25,22 +24,46 @@ class CartModel {
         return result?.total_price || 0;
     }
 
+    static async getTotalItems() {
+        const db = await openDB();
+        const result = await db.get(`SELECT COUNT(*) AS total_items FROM cart`);
+        return result?.total_items || 0;
+    }
+
     static async addToCart(productId, quantity) {
         const db = await openDB();
-        await db.run("INSERT INTO cart (product_id, quantity) VALUES (?, ?)", productId, quantity);
+        const existingItem = await db.get("SELECT quantity FROM cart WHERE product_id = ?", productId);
+
+        if (existingItem) {
+            let newQuantity = existingItem.quantity + quantity;
+            if (newQuantity > 10) newQuantity = 10;
+            return await db.run("UPDATE cart SET quantity = ? WHERE product_id = ?", [newQuantity, productId]);
+        } else {
+            const safeQuantity = quantity > 10 ? 10 : quantity;
+            return await db.run("INSERT INTO cart (product_id, quantity) VALUES (?, ?)", [productId, safeQuantity]);
+        }
     }
 
     static async getCartItems() {
         const db = await openDB();
-        const items = await db.all(`SELECT cart.id, products.name, products.price, cart.quantity
-                                    FROM cart
-                                    JOIN products ON cart.product_id = products.id`);
+        const items = await db.all(`
+            SELECT 
+                cart.id, 
+                products.id AS product_id, 
+                products.name, 
+                products.price, 
+                products.image_url, 
+                products.description, 
+                cart.quantity
+            FROM cart
+            JOIN products ON cart.product_id = products.id
+        `);
         return items;
     }
 
     static async updateItemQuantity(productId, quantity) {
         const db = await openDB();
-        await db.run("UPDATE cart SET quantity = ? WHERE product_id = ?", quantity, productId);
+        await db.run("UPDATE cart SET quantity = ? WHERE product_id = ?", [quantity, productId]);
     }
 
     static async removeFromCart(productId) {
@@ -48,18 +71,10 @@ class CartModel {
         await db.run("DELETE FROM cart WHERE product_id = ?", productId);
     }
 
-    static async clearCart() {
+    static async checkout() {
         const db = await openDB();
         await db.run("DELETE FROM cart");
     }
-
-    static async checkout() {
-        const db = await openDB();
-        
-        await db.run("UPDATE cart SET status = 'checked_out' WHERE status = 'open'");
-        this.clearCart();
-    }
-
 }
 
 export default CartModel;
