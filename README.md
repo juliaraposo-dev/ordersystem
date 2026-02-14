@@ -59,7 +59,7 @@ Error Handling: Integrated UI alerts for API failures (e.g., removal or checkout
 | Checkout | **POST** | `/api/cart/checkout` |
 
 
-##📁 Project Structure
+## 📁 Project Structure
 
 ├── backend  
 │   ├── controllers/  # Route handlers (req/res)  
