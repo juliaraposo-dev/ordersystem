@@ -53,6 +53,13 @@ class CartService {
         await CartModel.clearCart();
     }
 
+    static async checkout() {
+        if((await CartModel.getCartItems()).length === 0) {
+            throw new Error("Cart is empty");
+        }
+        await CartModel.checkout();
+    }
+
 }
 
 export default CartService;

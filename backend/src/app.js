@@ -9,6 +9,6 @@ app.use(express.json());
 
 app.use('/api/products', ProductRoutes);
 app.use('/api/cart', CartRoutes);
-app.use('/api/orders', OrderRoutes);
+
 
 export default app;

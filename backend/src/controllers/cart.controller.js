@@ -50,6 +50,14 @@ class CartController {
         }
     }
 
+    static async checkout(req, res) {
+        try {
+            await CartService.checkout();
+            res.status(200).json({ message: "Checkout successful" });
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
 }
 
 export default CartController;
