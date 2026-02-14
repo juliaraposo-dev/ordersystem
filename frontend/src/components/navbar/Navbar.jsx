@@ -1,7 +1,6 @@
 import "../../index.css";
-import { FaAtom, FaShoppingCart } from "react-icons/fa";
 import Logo from "../logo/Logo.jsx";
-import CartButton from "../cart-button/CartButton.jsx";
+import CartButton from "../cart/CartButton.jsx";
 
 export default function Navbar() {
   return (
@@ -9,7 +8,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto h-16 flex items-center justify-between">
         <Logo />
         <CartButton />
-
+        
       </div>
     </nav>
   );
