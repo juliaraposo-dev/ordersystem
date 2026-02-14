@@ -11,20 +11,24 @@ For evaluation purposes, the person responsible for the testing will have to ins
 
 1. Backend (API)
 
-cd backend
-npm install
-npm start
+	cd backend
+	npm install
+	npm start
+
 Runs on http://localhost:3001
 
 
 3. Frontend (UI)
 
-cd frontend
-npm install
-npm run dev
+	cd frontend
+	npm install
+	npm run dev
+
 Runs on http://localhost:5173
 
 🛠️ Tech Stack
+
+
 Frontend:
 
 Vite: Front-end tool.
@@ -40,13 +44,19 @@ Node.js & Express: Web framework.
 SQLite3: Serverless, zero-configuration SQL database engine.
 CORS: Middleware to enable cross-origin resource sharing.
 
+
+
 🚀 Key Features
+
+
 Cart Logic: Automatic quantity capping (max 10) and real-time total calculation.
 Persistent Storage: Cart data survives browser refreshes via SQLite database.
 Clean Navigation: Uses useNavigate for seamless transitions between Product List, Details, and Cart.
 Error Handling: Integrated UI alerts for API failures (e.g., removal or checkout errors).
 
 📡 API Reference
+
+
 ENDPOINTS:
 Action,Method,Endpoint
 List Products,GET,/api/products
@@ -55,7 +65,11 @@ Add to Cart,POST,/api/cart/add
 Remove Item,DELETE,/api/cart/remove/:productId
 Checkout,POST,/api/cart/checkout
 
+
+
 📁 Project Structure
+
+
 ├── backend
 │   ├── controllers/  # Route handlers (req/res)
 │   ├── models/       # Database queries (SQL)
