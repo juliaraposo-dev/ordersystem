@@ -8,13 +8,21 @@ class CartModel {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             product_id INTEGER NOT NULL,
             quantity INTEGER NOT NULL,
+            status TEXT NOT NULL DEFAULT 'open',
             FOREIGN KEY (product_id) REFERENCES products(id)
+
+            CHECK (quantity > 0 AND quantity <= 100)
         )`);
     }
 
-    static async dropTableCart() {
+    static async getTotalPrice() {
         const db = await openDB();
-        await db.exec("DROP TABLE IF EXISTS cart");
+        const result = await db.get(`
+            SELECT SUM(p.price * c.quantity) AS total_price 
+            FROM cart c 
+            JOIN products p ON c.product_id = p.id
+        `);
+        return result?.total_price || 0;
     }
 
     static async addToCart(productId, quantity) {
@@ -43,6 +51,13 @@ class CartModel {
     static async clearCart() {
         const db = await openDB();
         await db.run("DELETE FROM cart");
+    }
+
+    static async checkout() {
+        const db = await openDB();
+        
+        await db.run("UPDATE cart SET status = 'checked_out' WHERE status = 'open'");
+        this.clearCart();
     }
 
 }
