@@ -1,6 +1,6 @@
 # OrderSystem
 
-Full-Stack project developed for DTI's recruitment process. This READ.ME was written by Gemini AI after providing the files as input. It was also used throughout the UI build, to fix errors that appeared in the browser console. Additionally, I also used GitHub Co-Pilot as assistance while developing this project.
+Full-Stack project developed for my portfolio. This READ.ME was written by Gemini AI after providing the files as input. It was also used throughout the UI build, to fix errors that appeared in the browser console. Additionally, I also used GitHub Co-Pilot as assistance while developing this project.
 
 For evaluation purposes, the person responsible for the testing will have to insert the projects manually in the database. I used the VSCode extension Database Client for this task. When you run the API, a file named database.db will be created in the backend folder, and it should be the path you'll insert here:
 
